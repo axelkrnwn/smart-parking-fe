@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "../components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { NavLink, Outlet } from "react-router-dom";
 import AppSidebar from "@/components/app-sidebar";
 import { useAuth } from "@/hooks/use-auth";

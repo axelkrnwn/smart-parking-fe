@@ -1,8 +1,8 @@
 import routeConfig from "@/config/routeConfig"
 
-const useRoute = (role:string) => {
-    console.log(role)
-    return routeConfig[role]
+const useRoute = (username:string) => {
+    if (username !== '' && username !== 'admin') username = 'user'
+    return routeConfig[username]
 }
 
 export default useRoute

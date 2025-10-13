@@ -9,7 +9,7 @@ import ProfilePage from './pages/account/profile';
 
 function App() {
     const auth = useAuth()
-    const links = useRoute(auth?.user?.role ?? "")
+    const links = useRoute(auth?.user?.username ?? "")
 
     return (    
         <div className='w-screen box-border'>

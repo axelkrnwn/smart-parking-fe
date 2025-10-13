@@ -1,5 +1,5 @@
 import { ILink } from "@/interfaces/link"
-import AccountDashboard from "@/pages/landing/admin"
+import AdminPage from "@/pages/landing/admin"
 import Landing from "@/pages/landing/landing"
 import { Home } from "lucide-react"
 
@@ -17,7 +17,7 @@ const routeConfig:{[key:string]:ILink[]} = {
             icon: <Home className="mr-2 h-4 w-4"/>,
             name: "Home",
             to: "/",
-            element: <AccountDashboard />
+            element: <AdminPage />
         },
     ],
     "":[

@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/use-auth";
 
 const AppSidebar = () => {
     const auth = useAuth()
-    const links = useRoute(auth?.user?.role ?? "")
+    const links = useRoute(auth?.user?.username ?? "")
 
   return (
     <Sidebar variant="sidebar" collapsible="offcanvas" className="bg-slate-700 border-r h-full p-5 flex flex-col space-y-4 justify-center items-center">
