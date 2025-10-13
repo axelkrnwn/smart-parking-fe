@@ -18,6 +18,31 @@ function formatDate(value: string | undefined) {
     return "-"
   }
 }
+function getCost(parking: Parking) {
+
+  let duration= Math.floor(((parking.end? new Date(parking.end) : new Date()).getTime() - new Date(parking.start).getTime()) / (1000 * 60 * 60))
+
+  if (duration <= 1) {
+    return parking.ParkingType.first
+  }else if (duration <= 2) {
+    if (parking.ParkingType.second) {
+      return parking.ParkingType.first + parking.ParkingType.second
+    }else{
+      return 2 * parking.ParkingType.first
+    }
+  } else {
+
+    if (parking.ParkingType.third && parking.ParkingType.second){
+      return parking.ParkingType.first + parking.ParkingType.second + (duration - 2) * parking.ParkingType.third
+    }else if (parking.ParkingType.second){
+      return parking.ParkingType.first + (duration - 1) * parking.ParkingType.second
+    }else {
+      return duration * parking.ParkingType.first
+    }
+
+  }  
+
+}
 
 
 export function ParkingTable({ data }: { data: Parking[] }) {
@@ -48,6 +73,7 @@ export function ParkingTable({ data }: { data: Parking[] }) {
               <TableHead className="text-center">Plate</TableHead>
               <TableHead className="text-center">Start</TableHead>
               <TableHead className="text-center">End</TableHead>
+              <TableHead className="text-center">Price</TableHead>
               <TableHead className="text-center">Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -56,10 +82,11 @@ export function ParkingTable({ data }: { data: Parking[] }) {
               const isActive = !row.end
               return (
                 <TableRow key={row.userid}>
-                  <TableCell>Car</TableCell>
+                  <TableCell>{row.ParkingType.vehicletype}</TableCell>
                   <TableCell className="font-medium">{row.userid}</TableCell>
                   <TableCell>{formatDate(row.start)}</TableCell>
                   <TableCell>{formatDate(row.end)}</TableCell>
+                  <TableCell>{getCost(row)}</TableCell>
                   <TableCell>
                     <span
                       className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs ${
