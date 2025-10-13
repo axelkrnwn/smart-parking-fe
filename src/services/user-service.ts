@@ -12,13 +12,26 @@ const register = async (dto:RegisterFormValues) => {
         throw new Error("Register failed")
     }
 }
-const doLogin = async (dto:LoginFormValues) => {
-    console.log(dto)
-    // console.log(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_BASE_URL}/users/login`)
+
+const doLogout = async () => {
+    console.log('here')
     try {
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, dto)
-        // console.log(res.data)
-        window.localStorage.setItem('token', res.data.access_token)
+        let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/v1/user/logout`, {}, {
+            withCredentials: true
+        })
+        console.log(res)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const doLogin = async (dto:LoginFormValues) => {
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/v1/user/login`, dto, {
+            withCredentials: true
+        })
+        console.log("Login", res)
         if (res.status == 200){
             return res
         }
@@ -28,16 +41,12 @@ const doLogin = async (dto:LoginFormValues) => {
 }
 
 const me = async() => {
-    const token= getToken()
-
-    if (!token) return
     
     try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/me`, {
-            headers: {
-            Authorization: `Bearer ${token}`
-            }
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/v1/user/me`, {
+            withCredentials: true
         });
+        console.log("ME", res)
         if (res.status == 200){
             return res
         }
@@ -104,6 +113,7 @@ const restore = async (id:string) => {
 export {
     register,
     doLogin,
+    doLogout,
     me,
     getAll,
     remove,

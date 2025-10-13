@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useAuth } from "../../../hooks/use-auth";
+import { useAuth } from "@/hooks/use-auth";
 import { Form } from "@/components/ui/form";
 import Field from "@/components/ui/field";
 import { useForm } from "react-hook-form";

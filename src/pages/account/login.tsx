@@ -7,7 +7,7 @@ const Login =() => {
         <div className="h-screen w-screen flex items-center justify-center bg-muted">
             <Link to="/" className="fixed top-0 left-0"><ArrowLeft size={40}/></Link>
             <div>
-                <h1 className="text-3xl font-bold mb-6 text-center">Welcome to LinKasa</h1>
+                <h1 className="text-3xl font-bold mb-6 text-center">Welcome to Charles</h1>
                 <LoginForm />
             </div>
         </div>

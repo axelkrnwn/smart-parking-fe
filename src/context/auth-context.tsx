@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { doLogin, me } from "@/services/user-service";
+import { doLogin, doLogout, me } from "@/services/user-service";
 interface IUser {
     id: string;
     username: string;
@@ -9,7 +9,7 @@ interface IUser {
 interface IAuthContext {
   user: IUser | null;
   login: (email: string, password: string) => Promise<string>;
-  logout: () => void;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
@@ -28,6 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
+  
     try {
       await doLogin({email:email,password:password})
       const currentUser = await me()
@@ -47,9 +48,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return ""
   };
 
-  const logout = () => {
+  const logout = async () => {
+    
     localStorage.clear();
     setUser(null);
+    await doLogout()
   };
 
   return (

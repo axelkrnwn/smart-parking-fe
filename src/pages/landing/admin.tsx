@@ -1,4 +1,4 @@
-import CourseStatistic from "@/features/course/view/course-statistic"
+// import CourseStatistic from "@/features/course/view/course-statistic"
 import UserList from "@/features/user/view/user-list"
 
 const AccountDashboard = () => {
@@ -9,7 +9,7 @@ const AccountDashboard = () => {
                 <UserList />
             </div>
             <div className="p-5 w-1/2">
-                <CourseStatistic />
+                {/* <CourseStatistic /> */}
             </div>
         </div>
     </>

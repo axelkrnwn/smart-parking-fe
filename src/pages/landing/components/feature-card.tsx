@@ -1,23 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import { JSX } from "react"
 
 interface FeatureCardProps {
     icon: JSX.Element,
     title: String,
     description: String,
+    className?: string
 }
 
-const FeatureCard = ({icon,title, description}:FeatureCardProps) => {
+const FeatureCard = ({icon,title, description, className}:FeatureCardProps) => {
     return (
-        <Card className="transition-all hover:shadow-lg hover:scale-102 min-h-50 max-w-[30%]">
-              <CardHeader className="flex items-center gap-4">
+            <Card className={cn("h-full border-border bg-card", className)}>
+            <CardHeader className="flex flex-row items-center gap-3">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 {icon}
-                <CardTitle className="w-full text-md">{title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-sm">{description}</p>
-              </CardContent>
-        </Card>
+              </div>
+              <CardTitle className="text-base md:text-lg text-foreground text-pretty">{title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{description}</p>
+            </CardContent>
+          </Card>
     )
 }
 

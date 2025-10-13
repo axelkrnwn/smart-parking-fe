@@ -12,7 +12,7 @@ const AppSidebar = () => {
         <div className="p-5 flex flex-col w-4/5">
             <Link to={"/"}>
                 <h1 className="mb-10 text-slate-200 text-start font-semibold">
-                    LinKasa
+                    Charles
                 </h1>
             </Link>
             <div className="h-1/2 flex flex-col gap-y-2">

@@ -17,9 +17,8 @@ const ProfileCard = () => {
         const res = await me()
         setUser(res?.data)
     }
-    const logout = () =>{
-        auth?.logout()
-        navigate('/')
+    const logout = async () =>{
+        auth?.logout().then(() => navigate('/'))
     }
 
     useEffect(() => {
@@ -31,7 +30,6 @@ const ProfileCard = () => {
             <div className="flex flex-col items-center p-5">
                 <User size={100}/>
                 <h2 className="text-3xl font-semibold">{user.username}</h2>
-                <p className="text-muted-foreground capitalize">{user.role}</p>
             </div>
         </div>
 
@@ -39,10 +37,6 @@ const ProfileCard = () => {
           <div className="border-b-2 border-gray-100 w-full py-5">
             <p className="text-sm text-muted-foreground">Email</p>
             <p className="font-medium">{user.email}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Address</p>
-            <p className="font-medium">{user.address}</p>
           </div>
           <Button onClick={logout} className="bg-red-500">
             Logout
