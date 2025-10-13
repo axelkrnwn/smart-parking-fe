@@ -6,11 +6,16 @@ import { useEffect, useState } from "react";
 export default function AdminPage() {
 
    let [parkings, setParkings] = useState<Parking[]>([])
+   let [durations, setDurations] = useState<number[]>([])
 
    let fetchData = async () => {
-    let res = await getAll()
-    console.log(res.length)
-    setParkings(res)
+        let res = await getAll()
+        setParkings(res)
+        let durations = res.map(e => {
+            let end = e.end? new Date(e.end):new Date()
+            return (end.getTime() - new Date(e.start).getTime()) / (1000 * 60 * 60)
+        })
+        setDurations(durations)
    }
 
    useEffect(() => {
@@ -24,6 +29,11 @@ export default function AdminPage() {
         <p className="text-muted-foreground mt-1">
           View all parking entries, including vehicle type, plate number, start time, and end time.
         </p>
+        <div className="flex justify-around my-5 gap-5">
+            <p><b>Longest Parking Duration: </b>{Math.floor(Math.max(...durations))} Hours</p>
+            <p><b>Shortest Parking Duration: </b>{Math.floor(Math.min(...durations))} Hours</p>
+            <p><b>Average Parking Duration: </b>{Math.floor(durations.reduce((prev, cur) => prev + cur, 0) / durations.length)} Hours</p>
+        </div>
       </header>
 
       <section aria-label="Parking records">
