@@ -1,3 +1,4 @@
+import GateToggle from "@/features/gate/set-gate-status/component/gate-toggle";
 import { ParkingTable } from "@/features/parking/get-all-parkings/parking-table";
 import { Parking } from "@/interfaces/parking";
 import { getAll } from "@/services/parking-service";
@@ -33,6 +34,7 @@ export default function AdminPage() {
             <p><b>Longest Parking Duration: </b>{Math.floor(Math.max(...durations))} Hours</p>
             <p><b>Shortest Parking Duration: </b>{Math.floor(Math.min(...durations))} Hours</p>
             <p><b>Average Parking Duration: </b>{Math.floor(durations.reduce((prev, cur) => prev + cur, 0) / durations.length)} Hours</p>
+            <GateToggle />
         </div>
       </header>
 
