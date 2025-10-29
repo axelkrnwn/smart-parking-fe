@@ -21,7 +21,10 @@ function formatDate(value: string | undefined) {
 function getCost(parking: Parking) {
 
   let duration= Math.floor(((parking.end? new Date(parking.end) : new Date()).getTime() - new Date(parking.start).getTime()) / (1000 * 60 * 60))
-
+  console.log(duration)
+  console.log(parking.ParkingType.first)
+  console.log(parking.ParkingType.second)
+  console.log(parking.ParkingType.third)
   if (duration <= 1) {
     return parking.ParkingType.first
   }else if (duration <= 2) {
@@ -35,7 +38,7 @@ function getCost(parking: Parking) {
     if (parking.ParkingType.third && parking.ParkingType.second){
       return parking.ParkingType.first + parking.ParkingType.second + (duration - 2) * parking.ParkingType.third
     }else if (parking.ParkingType.second){
-      return parking.ParkingType.first + (duration - 1) * parking.ParkingType.second
+      return parking.ParkingType.first * 1 + (duration - 1) * parking.ParkingType.second
     }else {
       return duration * parking.ParkingType.first
     }
